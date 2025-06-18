@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MANISHA-MD Profile</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: linear-gradient(45deg, #0fffc1, #ff00ff, #007bff, #ff9900);
+      --text: #ffffff;
+      --card: rgba(255, 255, 255, 0.06);
+      --border: rgba(255, 255, 255, 0.2);
+    }
+    body.dark {
+      --bg: #0f0f0f;
+      --text: #eeeeee;
+      --card: #1a1a1a;
+      --border: #333;
+    }
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background: var(--bg);
+      background-size: 300% 300%;
+      animation: bgShift 12s ease infinite;
+      min-height: 100vh;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      gap: 25px;
+      transition: background 0.5s ease, color 0.3s ease;
+    }
+    @keyframes bgShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .card {
+      backdrop-filter: blur(20px);
+      background: var(--card);
+      border: 2px solid var(--border);
+      border-radius: 25px;
+      padding: 40px 30px;
+      text-align: center;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
+      user-select: none;
+    }
+    .profile-img {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 5px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 25px #00fff7, 0 0 40px #ff00c8;
+      animation: spin 10s linear infinite;
+      margin-bottom: 20px;
+      object-fit: cover;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
+    }
+    h1 {
+      font-size: 2.3em;
+      margin-bottom: 10px;
+    }
+    p {
+      font-size: 1em;
+      color: #ccc;
+      margin-bottom: 25px;
+    }
+    .glow-button {
+      padding: 12px 28px;
+      font-size: 1.1em;
+      border: none;
+      border-radius: 50px;
+      background: linear-gradient(270deg, #ff00ff, #00ffff, #ff00ff);
+      background-size: 600% 600%;
+      color: white;
+      cursor: pointer;
+      animation: glow 6s ease infinite;
+      box-shadow: 0 0 20px #fff;
+      margin: 10px auto;
+      display: block;
+      text-decoration: none;
+      font-weight: 600;
+      width: 220px;
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
+    @keyframes glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .glow-button:hover {
+      transform: scale(1.05);
+    }
+    .dark-toggle {
+      position: fixed;
+      top: 15px;
+      right: 15px;
+      background: #000;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+    }
+    .comment-box {
+      width: 100%;
+      max-width: 440px;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    .comment-box textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      resize: none;
+      font-size: 1em;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .comment-box button {
+      background: #00ffea;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .comment-box button:hover {
+      background: #00bbaa;
+    }
+    .music-player {
+      text-align: center;
+      max-width: 440px;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+    .music-thumb {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-radius: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    }
+    .music-controls button {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 10px 15px;
+      margin: 0 5px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1em;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    .music-controls button:hover {
+      background: #00ffaa;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Light/Dark Mode Toggle -->
+<button class="dark-toggle" onclick="toggleMode()">🌗 Toggle Light/Dark</button>
+
+<!-- Profile Card -->
+<div class="card">
+  <img class="profile-img" src="https://files.catbox.moe/vbi10j.png" alt="MANISHA-MD" />
+  <h1>MANISHA-MD</h1>
+  <p>Creative Coder • Stylish Profile Page</p>
+  <a class="glow-button" href="https://www.mediafire.com/file/arx3rpz8t7mhgdd/MANISHA-MD-main+(1).zip/file" download>📦 Download ZIP</a>
+  <a class="glow-button" href="https://github.com/manisha-Official18/MANISHA-MD" target="_blank">🌐 GitHub</a>
+  <a class="glow-button" href="https://wa.me/94721551183" target="_blank">📞 Contact Owner</a>
+</div>
+
+<!-- Music Player Section -->
+<div class="music-player">
+  <img class="music-thumb" src="https://files.catbox.moe/jbfllk.jpg" alt="Music Thumbnail" />
+  <audio id="audio" src="https://files.catbox.moe/rk6sgk.mp3"></audio>
+  <div class="music-controls">
+    <button onclick="prevAudio()">⏮️ Previous</button>
+    <button onclick="togglePlay()">▶️ Play/Pause</button>
+    <button onclick="nextAudio()">⏭️ Next</button>
+  </div>
+</div>
+
+<!-- Comment Box -->
+<div class="comment-box">
+  <textarea rows="4" placeholder="📝 Leave a comment..."></textarea>
+  <button onclick="alert('❤️ Thank you for your comment!')">Submit</button>
+</div>
+
+<script>
+  const audio = document.getElementById("audio");
+  let isPlaying = false;
+
+  function togglePlay() {
+    if (isPlaying) {
+      audio.pause();
+    } else {
+      audio.play();
+    }
+    isPlaying = !isPlaying;
+  }
+
+  function prevAudio() {
+    audio.currentTime = 0;
+  }
+
+  function nextAudio() {
+    audio.currentTime = audio.duration;
+  }
+
+  function toggleMode() {
+    document.body.classList.toggle("dark");
+  }
+</script>
+
+</body>
+  </html>
