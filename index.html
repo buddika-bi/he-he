@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>MANISHA-MD</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
   <style>
     :root {
       --bg: linear-gradient(45deg, #0fffc1, #ff00ff, #007bff, #ff9900);
@@ -19,7 +19,9 @@
       --border: #333;
     }
     * {
-      margin: 0; padding: 0; box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
     body {
@@ -36,9 +38,15 @@
       transition: background 0.5s ease, color 0.3s ease;
     }
     @keyframes bgShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
     .card {
       backdrop-filter: blur(20px);
@@ -62,8 +70,12 @@
       object-fit: cover;
     }
     @keyframes spin {
-      0% { transform: rotate(0); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
     }
     h1 {
       font-size: 2.3em;
@@ -94,9 +106,15 @@
       transition: transform 0.3s ease;
     }
     @keyframes glow {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
     }
     .glow-button:hover {
       transform: scale(1.05);
@@ -138,143 +156,125 @@
       margin-bottom: 10px;
     }
 
+    .music-controls {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 10px;
+    }
+
     .music-controls button {
       background: #fff;
       color: #000;
       border: none;
-      padding: 10px 15px;
-      margin: 0 5px;
-      border-radius: 8px;
+      padding: 12px 18px;
+      border-radius: 12px;
       cursor: pointer;
-      font-size: 1em;
+      font-size: 1.3em;
       font-weight: bold;
       transition: background 0.3s;
+      width: 60px;
+      user-select: none;
     }
 
     .music-controls button:hover {
       background: #00ffaa;
     }
-
-    .comment-box {
-      width: 100%;
-      max-width: 440px;
-      background: var(--card);
-      padding: 20px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-    }
-
-    .comment-box textarea {
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      border: none;
-      outline: none;
-      resize: none;
-      font-size: 1em;
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      margin-bottom: 10px;
-    }
-
-    .comment-box button {
-      background: #00ffea;
-      color: #000;
-      font-weight: bold;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .comment-box button:hover {
-      background: #00bbaa;
-    }
   </style>
 </head>
 <body>
+  <!-- Light/Dark Mode Toggle -->
+  <button class="dark-toggle" onclick="toggleMode()">🌗 Toggle Light/Dark</button>
 
-<!-- Light/Dark Mode Toggle -->
-<button class="dark-toggle" onclick="toggleMode()">🌗 Toggle Light/Dark</button>
-
-<!-- Profile Card -->
-<div class="card">
-  <img class="profile-img" src="https://files.catbox.moe/vbi10j.png" alt="MANISHA-MD" />
-  <h1>MANISHA-MD</h1>
-  <p>Creative Coder • Stylish Profile Page</p>
-  <a class="glow-button" href="https://www.mediafire.com/file/arx3rpz8t7mhgdd/MANISHA-MD-main+(1).zip/file" download>📦 Download ZIP</a>
-  <a class="glow-button" href="https://github.com/manisha-Official18/MANISHA-MD" target="_blank">🌐 GitHub</a>
-  <a class="glow-button" href="https://wa.me/94721551183" target="_blank">📞 Contact Owner</a>
-</div>
-
-<!-- Music Player -->
-<div class="music-player">
-  <img class="music-thumb" id="thumb" src="" alt="Thumbnail" />
-  <div class="music-title" id="title">Now Playing...</div>
-  <audio id="audio" controls></audio>
-  <div class="music-controls">
-    <button onclick="prevSong()">⏮️ Previous</button>
-    <button onclick="togglePlay()">▶️ Play/Pause</button>
-    <button onclick="nextSong()">⏭️ Next</button>
+  <!-- Profile Card -->
+  <div class="card">
+    <img class="profile-img" src="https://files.catbox.moe/vbi10j.png" alt="MANISHA-MD" />
+    <h1>MANISHA-MD</h1>
+    <p>Creative Coder • Stylish Profile Page</p>
+    <a class="glow-button" href="https://www.mediafire.com/file/arx3rpz8t7mhgdd/MANISHA-MD-main+(1).zip/file" download>📦 Download ZIP</a>
+    <a class="glow-button" href="https://github.com/manisha-Official18/MANISHA-MD" target="_blank">🌐 GitHub</a>
+    <a class="glow-button" href="https://wa.me/94721551183" target="_blank">📞 Contact Owner</a>
   </div>
-</div>
 
-<!-- Comment Box -->
-<div class="comment-box">
-  <textarea rows="4" placeholder="📝 Leave a comment..."></textarea>
-  <button onclick="alert('❤️ Thank you for your comment!')">Submit</button>
-</div>
+  <!-- Single Music Player (Multi-Song) -->
+  <div class="music-player">
+    <img class="music-thumb" id="cover" src="image1.jpg" alt="Music Cover" />
+    <div class="music-title" id="title">Music</div>
+    <audio id="audio" src="song1.mp3"></audio>
+    <div class="music-controls">
+      <button id="prev" title="Previous">⏮️</button>
+      <button id="playpause" title="Play/Pause">▶️</button>
+      <button id="next" title="Next">⏭️</button>
+    </div>
+  </div>
 
-<script>
-  const songs = [
-    {
-      title: "නුබව සොයා",
-      audio: "https://files.catbox.moe/rk6sgk.mp3",
-      thumb: "https://files.catbox.moe/jbfllk.jpg"
-    },
-    {
-      title: "බලා වැලපෙම් (costa)",
-      audio: "https://files.catbox.moe/s7m3li.mp3",
-      thumb: "https://files.catbox.moe/9lummg.jpg"
+  <script>
+    const audio = document.getElementById("audio");
+    const title = document.getElementById("title");
+    const cover = document.getElementById("cover");
+    const playPauseBtn = document.getElementById("playpause");
+    const prevBtn = document.getElementById("prev");
+    const nextBtn = document.getElementById("next");
+
+    const songs = [
+      { title: "නුබව සොයා", file: "https://files.catbox.moe/rk6sgk.mp3", image: "https://files.catbox.moe/jbfllk.jpg" },
+      { title: "බලා වැලපෙම් costa", file: "https://files.catbox.moe/s7m3li.mp3", image: "https://files.catbox.moe/9lummg.jpg" },
+    ];
+
+    let currentIndex = 0;
+    let isPlaying = false;
+
+    function loadSong(index) {
+      const song = songs[index];
+      audio.src = song.file;
+      cover.src = song.image;
+      title.textContent = song.title;
+      currentIndex = index;
     }
-  ];
 
-  let current = 0;
-  const audio = document.getElementById("audio");
-  const title = document.getElementById("title");
-  const thumb = document.getElementById("thumb");
+    function playAudio() {
+      audio.play();
+      isPlaying = true;
+      playPauseBtn.textContent = "⏸️";
+    }
 
-  function loadSong(index) {
-    audio.src = songs[index].audio;
-    thumb.src = songs[index].thumb;
-    title.innerText = songs[index].title;
-    audio.play();
-  }
+    function pauseAudio() {
+      audio.pause();
+      isPlaying = false;
+      playPauseBtn.textContent = "▶️";
+    }
 
-  function togglePlay() {
-    if (audio.paused) audio.play();
-    else audio.pause();
-  }
+    playPauseBtn.addEventListener("click", () => {
+      if (isPlaying) {
+        pauseAudio();
+      } else {
+        playAudio();
+      }
+    });
 
-  function prevSong() {
-    current = (current - 1 + songs.length) % songs.length;
-    loadSong(current);
-  }
+    prevBtn.addEventListener("click", () => {
+      currentIndex--;
+      if (currentIndex < 0) currentIndex = songs.length - 1;
+      loadSong(currentIndex);
+      playAudio();
+    });
 
-  function nextSong() {
-    current = (current + 1) % songs.length;
-    loadSong(current);
-  }
+    nextBtn.addEventListener("click", () => {
+      currentIndex++;
+      if (currentIndex >= songs.length) currentIndex = 0;
+      loadSong(currentIndex);
+      playAudio();
+    });
 
-  function toggleMode() {
-    document.body.classList.toggle("dark");
-  }
+    // Load first song on page load
+    window.onload = () => {
+      loadSong(0);
+    };
 
-  // Load first song on page load
-  window.onload = () => loadSong(current);
-</script>
-
+    // Auto next song when current ends
+    audio.addEventListener("ended", () => {
+      nextBtn.click();
+    });
+  </script>
 </body>
   </html>
