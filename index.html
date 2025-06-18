@@ -38,15 +38,9 @@
       transition: background 0.5s ease, color 0.3s ease;
     }
     @keyframes bgShift {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     .card {
       backdrop-filter: blur(20px);
@@ -70,12 +64,8 @@
       object-fit: cover;
     }
     @keyframes spin {
-      0% {
-        transform: rotate(0);
-      }
-      100% {
-        transform: rotate(360deg);
-      }
+      0% { transform: rotate(0); }
+      100% { transform: rotate(360deg); }
     }
     h1 {
       font-size: 2.3em;
@@ -106,15 +96,9 @@
       transition: transform 0.3s ease;
     }
     @keyframes glow {
-      0% {
-        background-position: 0% 50%;
-      }
-      50% {
-        background-position: 100% 50%;
-      }
-      100% {
-        background-position: 0% 50%;
-      }
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     .glow-button:hover {
       transform: scale(1.05);
@@ -130,7 +114,6 @@
       border-radius: 30px;
       cursor: pointer;
     }
-
     .music-player {
       text-align: center;
       max-width: 440px;
@@ -140,7 +123,6 @@
       border: 1px solid var(--border);
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     }
-
     .music-thumb {
       width: 100%;
       max-height: 200px;
@@ -149,20 +131,17 @@
       margin-bottom: 15px;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
-
     .music-title {
       font-weight: bold;
       font-size: 1.2em;
       margin-bottom: 10px;
     }
-
     .music-controls {
       display: flex;
       justify-content: center;
       gap: 15px;
       margin-top: 10px;
     }
-
     .music-controls button {
       background: #fff;
       color: #000;
@@ -176,36 +155,42 @@
       width: 60px;
       user-select: none;
     }
-
     .music-controls button:hover {
       background: #00ffaa;
     }
   </style>
 </head>
 <body>
-  <!-- Light/Dark Mode Toggle -->
   <button class="dark-toggle" onclick="toggleMode()">🌗 Toggle Light/Dark</button>
 
-  <!-- Profile Card -->
   <div class="card">
     <img class="profile-img" src="https://files.catbox.moe/vbi10j.png" alt="MANISHA-MD" />
     <h1>MANISHA-MD</h1>
-    <p>Creative Coder • Stylish Profile Page</p>
+    <p>ᴄʀᴇᴀᴛᴇᴅ ʙʏ : ᴍᴀɴɪꜱʜᴀ ᴄᴏᴅᴇʀ💕</p></p>
     <a class="glow-button" href="https://www.mediafire.com/file/arx3rpz8t7mhgdd/MANISHA-MD-main+(1).zip/file" download>📦 Download ZIP</a>
     <a class="glow-button" href="https://github.com/manisha-Official18/MANISHA-MD" target="_blank">🌐 GitHub</a>
     <a class="glow-button" href="https://wa.me/94721551183" target="_blank">📞 Contact Owner</a>
   </div>
 
-  <!-- Single Music Player (Multi-Song) -->
   <div class="music-player">
-    <img class="music-thumb" id="cover" src="image1.jpg" alt="Music Cover" />
-    <div class="music-title" id="title">Music</div>
-    <audio id="audio" src="song1.mp3"></audio>
+    <img class="music-thumb" id="cover" src="https://files.catbox.moe/jbfllk.jpg" alt="Music Cover" />
+    <div class="music-title" id="title">නුබව සොයා</div>
+    <audio id="audio" src="https://files.catbox.moe/rk6sgk.mp3"></audio>
     <div class="music-controls">
       <button id="prev" title="Previous">⏮️</button>
       <button id="playpause" title="Play/Pause">▶️</button>
       <button id="next" title="Next">⏭️</button>
     </div>
+  </div>
+
+  <!-- Comment Box -->
+  <div class="card" style="width:100%; max-width: 440px;">
+    <h2 style="margin-bottom: 10px;">💬 Leave a Comment</h2>
+    <form onsubmit="return submitComment(event)">
+      <textarea id="commentBox" placeholder="Write your comment here..." style="width: 100%; padding: 10px; border-radius: 10px; resize: none; height: 80px; border: 1px solid var(--border); background: var(--card); color: var(--text);"></textarea>
+      <button type="submit" style="margin-top: 10px; width: 100%; padding: 10px; background: #00ffaa; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">Submit</button>
+    </form>
+    <div id="commentList" style="margin-top: 20px; text-align: left;"></div>
   </div>
 
   <script>
@@ -245,36 +230,50 @@
     }
 
     playPauseBtn.addEventListener("click", () => {
-      if (isPlaying) {
-        pauseAudio();
-      } else {
-        playAudio();
-      }
+      isPlaying ? pauseAudio() : playAudio();
     });
 
     prevBtn.addEventListener("click", () => {
-      currentIndex--;
-      if (currentIndex < 0) currentIndex = songs.length - 1;
+      currentIndex = (currentIndex - 1 + songs.length) % songs.length;
       loadSong(currentIndex);
       playAudio();
     });
 
     nextBtn.addEventListener("click", () => {
-      currentIndex++;
-      if (currentIndex >= songs.length) currentIndex = 0;
+      currentIndex = (currentIndex + 1) % songs.length;
       loadSong(currentIndex);
       playAudio();
     });
 
-    // Load first song on page load
     window.onload = () => {
       loadSong(0);
     };
 
-    // Auto next song when current ends
     audio.addEventListener("ended", () => {
       nextBtn.click();
     });
+
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+    }
+
+    function submitComment(event) {
+      event.preventDefault();
+      const commentBox = document.getElementById("commentBox");
+      const commentList = document.getElementById("commentList");
+      const comment = commentBox.value.trim();
+      if (!comment) return;
+      const commentEl = document.createElement("div");
+      commentEl.style.marginTop = "10px";
+      commentEl.style.padding = "10px";
+      commentEl.style.borderRadius = "10px";
+      commentEl.style.background = "var(--card)";
+      commentEl.style.border = "1px solid var(--border)";
+      commentEl.style.color = "var(--text)";
+      commentEl.textContent = "🗨️ " + comment;
+      commentList.appendChild(commentEl);
+      commentBox.value = "";
+    }
   </script>
 </body>
   </html>
