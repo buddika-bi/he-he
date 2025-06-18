@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>MANISHA-MD Profile</title>
+  <title>MANISHA-MD</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
   <style>
     :root {
@@ -50,7 +50,6 @@
       max-width: 440px;
       width: 100%;
       box-shadow: 0 0 50px rgba(0, 255, 255, 0.2);
-      user-select: none;
     }
     .profile-img {
       width: 160px;
@@ -113,40 +112,7 @@
       border-radius: 30px;
       cursor: pointer;
     }
-    .comment-box {
-      width: 100%;
-      max-width: 440px;
-      background: var(--card);
-      padding: 20px;
-      border-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
-    }
-    .comment-box textarea {
-      width: 100%;
-      padding: 15px;
-      border-radius: 12px;
-      border: none;
-      outline: none;
-      resize: none;
-      font-size: 1em;
-      background: rgba(255,255,255,0.1);
-      color: #fff;
-      margin-bottom: 10px;
-    }
-    .comment-box button {
-      background: #00ffea;
-      color: #000;
-      font-weight: bold;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-    .comment-box button:hover {
-      background: #00bbaa;
-    }
+
     .music-player {
       text-align: center;
       max-width: 440px;
@@ -156,6 +122,7 @@
       border: 1px solid var(--border);
       box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     }
+
     .music-thumb {
       width: 100%;
       max-height: 200px;
@@ -164,6 +131,13 @@
       margin-bottom: 15px;
       box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
     }
+
+    .music-title {
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 10px;
+    }
+
     .music-controls button {
       background: #fff;
       color: #000;
@@ -176,8 +150,47 @@
       font-weight: bold;
       transition: background 0.3s;
     }
+
     .music-controls button:hover {
       background: #00ffaa;
+    }
+
+    .comment-box {
+      width: 100%;
+      max-width: 440px;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    }
+
+    .comment-box textarea {
+      width: 100%;
+      padding: 15px;
+      border-radius: 12px;
+      border: none;
+      outline: none;
+      resize: none;
+      font-size: 1em;
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      margin-bottom: 10px;
+    }
+
+    .comment-box button {
+      background: #00ffea;
+      color: #000;
+      font-weight: bold;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .comment-box button:hover {
+      background: #00bbaa;
     }
   </style>
 </head>
@@ -196,16 +209,15 @@
   <a class="glow-button" href="https://wa.me/94721551183" target="_blank">📞 Contact Owner</a>
 </div>
 
-<!-- Music Player Section -->
+<!-- Music Player -->
 <div class="music-player">
-  <img class="music-thumb" src="https://files.catbox.moe/jbfllk.jpg" alt="Music Thumbnail" />
-  <audio id="audio" src="https://files.catbox.moe/rk6sgk.mp3"></audio>
-  <img class="music-thumb" src="https://files.catbox.moe/9lummg.jpg" alt="Music Thumbnail" />
-  <audio id="audio" src="https://files.catbox.moe/s7m3li.mp3"></audio>
+  <img class="music-thumb" id="thumb" src="" alt="Thumbnail" />
+  <div class="music-title" id="title">Now Playing...</div>
+  <audio id="audio" controls></audio>
   <div class="music-controls">
-    <button onclick="prevAudio()">⏮️ Previous</button>
+    <button onclick="prevSong()">⏮️ Previous</button>
     <button onclick="togglePlay()">▶️ Play/Pause</button>
-    <button onclick="nextAudio()">⏭️ Next</button>
+    <button onclick="nextSong()">⏭️ Next</button>
   </div>
 </div>
 
@@ -216,29 +228,52 @@
 </div>
 
 <script>
+  const songs = [
+    {
+      title: "නුබව සොයා",
+      audio: "https://files.catbox.moe/rk6sgk.mp3",
+      thumb: "https://files.catbox.moe/jbfllk.jpg"
+    },
+    {
+      title: "බලා වැලපෙම් (costa)",
+      audio: "https://files.catbox.moe/s7m3li.mp3",
+      thumb: "https://files.catbox.moe/9lummg.jpg"
+    }
+  ];
+
+  let current = 0;
   const audio = document.getElementById("audio");
-  let isPlaying = false;
+  const title = document.getElementById("title");
+  const thumb = document.getElementById("thumb");
+
+  function loadSong(index) {
+    audio.src = songs[index].audio;
+    thumb.src = songs[index].thumb;
+    title.innerText = songs[index].title;
+    audio.play();
+  }
 
   function togglePlay() {
-    if (isPlaying) {
-      audio.pause();
-    } else {
-      audio.play();
-    }
-    isPlaying = !isPlaying;
+    if (audio.paused) audio.play();
+    else audio.pause();
   }
 
-  function prevAudio() {
-    audio.currentTime = 0;
+  function prevSong() {
+    current = (current - 1 + songs.length) % songs.length;
+    loadSong(current);
   }
 
-  function nextAudio() {
-    audio.currentTime = audio.duration;
+  function nextSong() {
+    current = (current + 1) % songs.length;
+    loadSong(current);
   }
 
   function toggleMode() {
     document.body.classList.toggle("dark");
   }
+
+  // Load first song on page load
+  window.onload = () => loadSong(current);
 </script>
 
 </body>
